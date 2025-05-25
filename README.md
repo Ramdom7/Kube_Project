@@ -7,7 +7,6 @@ Ce projet a pour objectifs de  conteneuriser, configurer et déployer les applic
 - pgAdmin 4 : Interface Web d'administration pour PostgreSQL  
 - Application web développer avec Flask permettant l'accès aux deux services ci-dessus.  
   
-Source :  [Github repository](https://github.com/OlivierKouokam/mini-projet-5esgi)   
 
 ---
  
@@ -21,16 +20,6 @@ Source :  [Github repository](https://github.com/OlivierKouokam/mini-projet-5esg
  
 ---
 
-# Architecture mise en place
-
-L’architecture déployée repose sur trois composants principaux, chacun dans un conteneur Kubernetes au sein du namespace icgroup. Le premier est PostgreSQL, qui sert de base de données relationnelle pour stocker toutes les données métiers. Il est exposé en interne via un Service Kubernetes nommé postgresql-service, ce qui permet à d'autres pods du namespace d'y accéder via le DNS interne. Le second composant est Odoo, une application web de gestion d'entreprise, qui se connecte à PostgreSQL pour lire et écrire des données ; son déploiement inclut un volume persistant pour conserver les fichiers entre les redémarrages, et il est exposé à l’extérieur via un NodePort (port 30090). Enfin, pgAdmin est un outil d’administration de PostgreSQL déployé pour permettre aux développeurs ou administrateurs de visualiser et gérer la base de données via une interface web (sur le port 30091). Chaque composant a un volume dédié pour la persistance, et les accès sont sécurisés via des utilisateurs distincts dans PostgreSQL.
-  
-## Clonage du dépôt
- 
-```bash
-git clone https://github.com/ccousin26/mini-projet-5esgi.git
-cd ic-webapp
-```
 
 # Deploiement de l'application ic-webapp avec Docker
 
@@ -84,12 +73,8 @@ docker ps -a
 ```
 ![docker ps](./images/docker-ps.JPG)
 
-On peut voir que le conteneur est bien en running, on va pouvoir tenter d'accéder à sa page web afin de vérifier son bon fonctionnement.
+On peut voir que le conteneur est bien en running
 
-```bash
-http://172.180.0.29:8080
-```
-![web interface (docker)](./images/web-interface.JPG)
 
 On peut essayer d'accéder la page odoo :
 ![odoo interface (docker)](./images/odoo-interface.JPG)
